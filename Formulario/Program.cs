@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Formulario.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<FormularioContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FormularioContext") ?? throw new InvalidOperationException("Connection string 'FormularioContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
