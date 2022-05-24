@@ -18,8 +18,8 @@ namespace Formulario.Models
         [Required(ErrorMessage = "Este campo é obrigatório")]
         public string EMail { get; set; } = string.Empty;
 
-        [MaxLength(25)]
+        [MaxLength(18)]
         [Required(ErrorMessage = "Este campo é obrigatório")]
-        public int Telefone { get; set; }
+        public string Telefone { get; set; } = string.Empty;
     }
 }

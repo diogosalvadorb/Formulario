@@ -23,20 +23,36 @@ namespace Formulario.Controllers
             return View();
         }
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            Usuarios usuario =  _usuariosRepositorio.ListarPorId(id);
+            return View(usuario);
         }
 
-        public IActionResult ConfirmarDelete()
+        public IActionResult ConfirmarDelete(int id)
         {
-            return View();
+            Usuarios usuario = _usuariosRepositorio.ListarPorId(id);
+
+            return View(usuario);
+        }
+
+        public IActionResult Apagar(int id)
+        {
+            _usuariosRepositorio.Apagar(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Criar(Usuarios usuario)
         {
             _usuariosRepositorio.Adicionar(usuario);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(Usuarios usuario)
+        {
+            _usuariosRepositorio.Atualizar(usuario);
             return RedirectToAction("Index");
         }
     }
