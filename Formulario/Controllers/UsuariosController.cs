@@ -38,22 +38,68 @@ namespace Formulario.Controllers
 
         public IActionResult Apagar(int id)
         {
-            _usuariosRepositorio.Apagar(id);
-            return RedirectToAction("Index");
+            try
+            {
+                bool apagado =  _usuariosRepositorio.Apagar(id);
+
+                if (apagado)
+                {
+                    TempData["MensagemSucesso"] = "Formulário apagado com sucesso!";
+                }
+                else
+                {
+                    TempData["MensagemError"] = "Não foi possível apagar o formulário";
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception error)
+            {
+                TempData["MensagemError"] = $"Não foi possível apagar o formulário, erro: {error.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Criar(Usuarios usuario)
         {
-            _usuariosRepositorio.Adicionar(usuario);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _usuariosRepositorio.Adicionar(usuario);
+                    TempData["MensagemSucesso"] = "Formulário cadastrado com sucesso";
+                    return RedirectToAction("Index");
+                }
+
+                return View(usuario);
+            }
+            catch (Exception error)
+            {
+                TempData["MensagemError"] = $"Não foi possível cadastrar o formulário, Erro:{error.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Alterar(Usuarios usuario)
         {
-            _usuariosRepositorio.Atualizar(usuario);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _usuariosRepositorio.Atualizar(usuario);
+                    TempData["MensagemSucesso"] = "Informação alterado com sucesso";
+                    return RedirectToAction("Index");
+                }
+
+                return View("Editar", usuario);
+            }
+            catch (Exception error)
+            {
+                TempData["MensagemError"] = $"Não foi possível atualizar o formulário, Erro:{error.Message}";
+                return RedirectToAction("Index");
+            }          
         }
     }
 }

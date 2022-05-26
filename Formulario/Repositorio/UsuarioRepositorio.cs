@@ -16,7 +16,7 @@ namespace Formulario.Repositorio
             return _context.Usuarios.ToList();
         }
 
-        public Usuarios ListarPorId(int id)
+        public Usuarios ? ListarPorId(int id)
         {
             return _context.Usuarios.FirstOrDefault(x => x.Id == id);
         }

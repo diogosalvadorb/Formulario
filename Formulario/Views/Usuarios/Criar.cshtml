@@ -13,21 +13,25 @@
   <div class="mb-3">
     <label for="Nome" class="form-label">Nome</label>
     <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário">
+    @Html.ValidationMessageFor(x => x.Nome)
   </div>
 
   <div class="mb-3">
     <label for="Cidade" class="form-label">Cidade</label>
     <input type="text" asp-for="Cidade" class="form-control" placeholder="Digite a cidade do usuário">
+    @Html.ValidationMessageFor(x => x.Cidade)
   </div>
 
   <div class="mb-3">
     <label for="email" class="form-label">E-Mail</label>
     <input type="text" asp-for="EMail" class="form-control" placeholder="Digite o e-mail do usuário">
+    @Html.ValidationMessageFor(x => x.EMail)
   </div>
 
    <div class="mb-3">
     <label for="Telefone" class="form-label">Telefone</label>
     <input type="text" asp-for="Telefone" class="form-control" placeholder="Digite o telefone do usuário">
+    @Html.ValidationMessageFor(x => x.Telefone)
   </div>
 
   <button type="submit" class="btn btn-primary">Adicionar</button>
